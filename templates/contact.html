@@ -6,15 +6,32 @@
     <link rel="stylesheet" href={{ url_for('static', filename='style.css') }}
 </head>
 <body>
+    <div class="container">
     <form method="POST" action={{ url_for('contact_complete') }}>
         Username:
-        <input type="text" label="Username:" name="username">
+        <input type="text" label="Username:" name="username" value={{ username }}, placeholder="Username">
         <br/>
-        Password:
-        <input type="text" label="Password:" name="email">
+        Email:
+        <input type="text" label="Email:" name="email" value={{ email }}, placeholder="Email Address">
+        <br/>
+
+        <textarea name="description", label="Requirement:" placeholder="Input your Needs">
+            {{ description }}
+        </textarea>
         <br/>
         Submit:
         <input type="submit" value="Submit">
     </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li class="flash">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    </div>
+
 </body>
 </html>
